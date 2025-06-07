@@ -1,0 +1,10 @@
+<MaltegoEntity id="maltego.Organization" displayName="Organization" displayNamePlural="Organizations" description="A social group which distributes tasks for a collective goal" category="Groups" smallIconResource="Organization" largeIconResource="Organization" allowedRoot="true" conversionOrder="2147483647" visible="true">
+   <Properties value="title" displayValue="title">
+      <Groups/>
+      <Fields>
+         <Field name="title" type="string" nullable="true" hidden="false" readonly="false" description="Name of the organization" displayName="Name">
+            <SampleValue>United Nations</SampleValue>
+         </Field>
+      </Fields>
+   </Properties>
+</MaltegoEntity>

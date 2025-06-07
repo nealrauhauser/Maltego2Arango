@@ -1,0 +1,13 @@
+<MaltegoEntity id="maltego.EmailAddress" displayName="Email Address" displayNamePlural="Email Addresses" description="An email mailbox to which email messages may be delivered" category="Personal" smallIconResource="Email2" largeIconResource="Email2" allowedRoot="true" conversionOrder="80" visible="true">
+   <Converter>
+      <Value><![CDATA[(([ \t]*([a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+(\.[a-zA-Z0-9\!\#\$\%\&\'\*\+\-\/\=\?\^\_\`\{\|\}\~]+)*)[ \t]*)|(\"([ \t]*([\x01-\x08\x0B\x0C\x0E-\x1F\x7F\x21\x23-\x5B\x5D-\x7E]|(\\[\x01-\x09\x0B\x0C\x0E-\x7F])))*[ \t]*\"))@[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,6}]]></Value>
+   </Converter>
+   <Properties value="email" displayValue="email">
+      <Groups/>
+      <Fields>
+         <Field name="email" type="string" nullable="true" hidden="false" readonly="false" description="" displayName="Email Address">
+            <SampleValue>support@maltego.com</SampleValue>
+         </Field>
+      </Fields>
+   </Properties>
+</MaltegoEntity>

@@ -1,0 +1,13 @@
+<MaltegoEntity id="maltego.NSRecord" displayName="NS Record" displayNamePlural="NS Records" description="A DNS name server record" category="Infrastructure" smallIconResource="NSRecord" largeIconResource="NSRecord" allowedRoot="true" conversionOrder="2147483647" visible="true">
+   <BaseEntities>
+      <BaseEntity>maltego.DNSName</BaseEntity>
+   </BaseEntities>
+   <Properties value="fqdn" displayValue="fqdn">
+      <Groups/>
+      <Fields>
+         <Field name="fqdn" type="string" nullable="true" hidden="false" readonly="false" description="" displayName="NS Record">
+            <SampleValue>a.iana-servers.net.</SampleValue>
+         </Field>
+      </Fields>
+   </Properties>
+</MaltegoEntity>

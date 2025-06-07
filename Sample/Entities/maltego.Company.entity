@@ -1,0 +1,13 @@
+<MaltegoEntity id="maltego.Company" displayName="Company" displayNamePlural="Companies" description="A business organization" category="Groups" smallIconResource="Company" largeIconResource="Company" allowedRoot="true" conversionOrder="2147483647" visible="true">
+   <BaseEntities>
+      <BaseEntity>maltego.Organization</BaseEntity>
+   </BaseEntities>
+   <Properties value="title" displayValue="title">
+      <Groups/>
+      <Fields>
+         <Field name="title" type="string" nullable="true" hidden="false" readonly="false" description="Name of the company" displayName="Name">
+            <SampleValue>Maltego Technologies GmbH</SampleValue>
+         </Field>
+      </Fields>
+   </Properties>
+</MaltegoEntity>

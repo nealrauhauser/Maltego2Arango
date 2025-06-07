@@ -1,0 +1,16 @@
+<MaltegoEntity id="maltego.IPv4Address" displayName="IPv4 Address" displayNamePlural="IPv4 Addresses" description="An IP version 4 address" category="Infrastructure" smallIconResource="NetworkCard" largeIconResource="NetworkCard" allowedRoot="true" conversionOrder="60" visible="true">
+   <Converter>
+      <Value><![CDATA[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)]]></Value>
+   </Converter>
+   <Properties value="ipv4-address" displayValue="ipv4-address">
+      <Groups/>
+      <Fields>
+         <Field name="ipv4-address" type="string" nullable="true" hidden="false" readonly="false" description="" displayName="IP Address">
+            <SampleValue>93.184.216.34</SampleValue>
+         </Field>
+         <Field name="ipaddress.internal" type="boolean" nullable="true" hidden="false" readonly="false" description="" displayName="Internal">
+            <SampleValue>false</SampleValue>
+         </Field>
+      </Fields>
+   </Properties>
+</MaltegoEntity>
