@@ -6,7 +6,6 @@ import xml.etree.ElementTree as ET
 import os
 from pathlib import Path
 
-
 def parse_entity_definition(entity_content):
     """Parse entity XML to extract field definitions"""
     root = ET.fromstring(entity_content)
@@ -38,47 +37,49 @@ def parse_entity_definition(entity_content):
 
 
 def extract_lucene_data(lucene_dir):
-    """Extract data from Lucene index directory using Java subprocess"""
+    """Extract data from Lucene index directory using Java LuceneReader"""
     import subprocess
     
     if not os.path.exists(lucene_dir):
         return []
     
-    java_code = f'''
-import org.apache.lucene.index.*;
-import org.apache.lucene.store.*;
-import org.apache.lucene.document.*;
-import java.nio.file.Paths;
-import java.util.*;
-
-public class LuceneExtractor {{
-    public static void main(String[] args) {{
-        try {{
-            Directory dir = FSDirectory.open(Paths.get("{lucene_dir}"));
-            if (DirectoryReader.indexExists(dir)) {{
-                DirectoryReader reader = DirectoryReader.open(dir);
-                System.out.println("Documents: " + reader.numDocs());
-                
-                for (int i = 0; i < Math.min(reader.numDocs(), 10); i++) {{
-                    Document doc = reader.document(i);
-                    System.out.println("Document " + i + ":");
-                    for (IndexableField field : doc.getFields()) {{
-                        System.out.println("  " + field.name() + ": " + field.stringValue());
-                    }}
-                }}
-                reader.close();
-            }} else {{
-                System.out.println("No valid Lucene index found");
-            }}
-            dir.close();
-        }} catch (Exception e) {{
-            System.out.println("Error: " + e.getMessage());
-        }}
-    }}
-}}
-'''
+    # Try to use our compiled Java LuceneReader with Lucene 6.6.6
+    java_home = "/opt/homebrew/Cellar/openjdk@21/21.0.7/libexec/openjdk.jdk/Contents/Home"
+    lucene_cp = "/Users/brain/work/gits/Maltego2Arango/lucene-6.6.6/core/lucene-core-6.6.6.jar:/Users/brain/work/gits/Maltego2Arango/lucene-6.6.6/backward-codecs/lucene-backward-codecs-6.6.6.jar"
     
-    # For now, just list files and return basic info
+    # Check if LuceneReader.class exists
+    reader_class = "/Users/brain/work/gits/Maltego2Arango/LuceneReader.class"
+    if os.path.exists(reader_class):
+        try:
+            env = os.environ.copy()
+            env['JAVA_HOME'] = java_home
+            
+            result = subprocess.run([
+                'java', '-cp', f'{lucene_cp}:.', 
+                'LuceneReader', lucene_dir
+            ], capture_output=True, text=True, env=env, 
+            cwd='/Users/brain/work/gits/Maltego2Arango')
+            
+            if result.returncode == 0:
+                return {
+                    'status': 'success',
+                    'output': result.stdout,
+                    'method': 'Java LuceneReader'
+                }
+            else:
+                return {
+                    'status': 'error', 
+                    'error': result.stderr,
+                    'method': 'Java LuceneReader'
+                }
+        except Exception as e:
+            return {
+                'status': 'exception',
+                'error': str(e),
+                'method': 'Java LuceneReader'
+            }
+    
+    # Fallback: just list files
     lucene_files = []
     if os.path.exists(lucene_dir):
         for file in os.listdir(lucene_dir):
@@ -86,7 +87,8 @@ public class LuceneExtractor {{
     
     return {
         'files': lucene_files,
-        'java_extraction': 'Available with full Java classpath setup'
+        'status': 'file_list_only',
+        'method': 'Directory listing'
     }
 
 
