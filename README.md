@@ -61,4 +61,4 @@ fi```
 
 Once lqt runs you can begin exploring the contents of the Lucene indices. Again, the LLMs are pretty useless in this area; they will offer command strings that simply do not work with lqt. Find yourself a folder with some actual Lucene files in it and issue this command from its parent directory to get started.
 
-```lqt --index DataEntities -q %all -format json-pretty```
+lqt --index DataEntities -q %all -format json-pretty
