@@ -45,7 +45,7 @@ https://github.com/joelb-git/lqt
 
 I found making dir explicit was needed in order to use this script from anywhere other than its install directory. The --add-opens java.base/java.nio=ALL-UNNAMED is needed to make this script behave with anything newer than OpenJDK11.
 
-#! /bin/sh
+```#! /bin/sh
 
 #dir=$(dirname $0)
 dir=/root/lqt
@@ -57,4 +57,4 @@ if [ -e /root/lqt/target/classes/com/basistech/lucene/tools/LuceneQueryTool.clas
 else
     echo "Please run 'mvn compile' first."
     exit 1
-fi
+fi```
