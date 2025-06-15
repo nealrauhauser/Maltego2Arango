@@ -15,7 +15,7 @@ MTGX has the following subdirectories and the graph structure itself is stored a
 * ./Files/Graph1
 * ./Graphs
 * ./Entities
-* 
+
 MTGL has the following subdirectories. The Entities subdirectory still contains XML format .entity files but the graph itself is no longer an atomic human readable file. Instead you will find the graph structure expressed as a number of Apache Lucene indices. This change occurred in 2016 and if you examine the .si files you will find that they mentioned Lucene 5.5.5, the final 5.5 release. As of the creation of this repo, in mid-2025, the current Lucene version is 10.2.
 
 * ./Entities
@@ -45,7 +45,7 @@ https://github.com/joelb-git/lqt
 
 I found making dir explicit was needed in order to use this script from anywhere other than its install directory. The --add-opens java.base/java.nio=ALL-UNNAMED is needed to make this script behave with anything newer than OpenJDK11.
 
-`#! /bin/sh
+#! /bin/sh
 
 #dir=$(dirname $0)
 dir=/root/lqt
@@ -57,4 +57,4 @@ if [ -e /root/lqt/target/classes/com/basistech/lucene/tools/LuceneQueryTool.clas
 else
     echo "Please run 'mvn compile' first."
     exit 1
-fi`
+fi
